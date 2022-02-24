@@ -1,4 +1,5 @@
 const express = require('express');
+const Pokemon = require('./pokemon/pokemon-model');
 
 const server = express();
 
@@ -9,19 +10,27 @@ server.get('/', (req, res) => {
 });
 
 server.get('/pokemon', (req, res) => {
-  res.end();
+  Pokemon.getAll()
+    .then(pokemon => res.json(pokemon))
+    .catch(err => console.log(err));
 });
 
 server.get('/pokemon/:id', (req, res) => {
-  res.end();
+  Pokemon.getById(req.params.id)
+    .then(pokemon => res.json(pokemon))
+    .catch(err => console.log(err));
 });
 
 server.post('/pokemon', (req, res) => {
-  res.end();
+  Pokemon.insert(req.body)
+    .then(pokemon => res.status(201).json(pokemon))
+    .catch(err => console.log(err));
 });
 
 server.delete('/pokemon/:id', (req, res) => {
-  res.end();
+  Pokemon.remove(req.params.id)
+    .then(deleted => res.json(deleted))
+    .catch(err => console.log(err));
 });
 
 module.exports = server;

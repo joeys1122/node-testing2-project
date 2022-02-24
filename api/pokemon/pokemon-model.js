@@ -9,11 +9,14 @@ function getById(id) {
 }
 
 function insert(pokemon) {
-  return null
+  return db('pokemon').insert(pokemon)
+    .then(([id]) => {
+      return getById(id);
+    });
 }
 
 function remove(id) {
-  return null
+  return db('pokemon').where('id', id).del();
 }
 
 module.exports = {
