@@ -6,7 +6,7 @@ const server = express();
 server.use(express.json());
 
 const checkId = async (req, res, next) => {
-  const poke = await Pokemon.getById(req.params.id);
+  const poke = await Pokemon.getById(req.params.id).first();
   if(!poke) {
     res.status(404).json({message:`pokemon with id ${req.params.id} not found`})
   } else {

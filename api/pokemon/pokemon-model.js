@@ -5,13 +5,13 @@ function getAll() {
 }
 
 function getById(id) {
-  return db('pokemon').where('id', id).first();
+  return db('pokemon').where('id', id);
 }
 
 function insert(pokemon) {
   return db('pokemon').insert(pokemon)
     .then(([id]) => {
-      return getById(id);
+      return getById(id).first();
     });
 }
 
